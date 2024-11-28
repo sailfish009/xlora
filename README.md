@@ -92,12 +92,20 @@ import torch
 import xlora
 from transformers import AutoConfig, AutoModelForCausalLM # type: ignore
 
+# llava_qwen
+# config = LlavaQwenConfig.from_pretrained(...)
+# https://github.com/LLaVA-VL/LLaVA-NeXT/issues/284
+# transformers/generation/configuration_utils.py
+# # decoder_config_dict = decoder_config.to_dict()
+# decoder_config_dict = decoder_config.
+
 model = AutoModelForCausalLM.from_pretrained(
     "mistralai/Mistral-7B-Instruct-v0.1",
     trust_remote_code=True,
     use_flash_attention_2=False,
     device_map="cuda:0",
     torch_dtype=torch.bfloat16,
+    # config = config, # llava
 )
 
 config = AutoConfig.from_pretrained(
